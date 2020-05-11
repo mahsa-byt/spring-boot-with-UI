@@ -59,4 +59,12 @@ public class User {
     public void setFood(String food) {
         this.food = food;
     }
+
+    public Boolean getHasOffer() {
+        return hasOffer;
+    }
+
+    public void setHasOffer(Boolean hasOffer) {
+        this.hasOffer = hasOffer;
+    }
 }

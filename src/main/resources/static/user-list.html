@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width"/>
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <!---->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var table = $('#dataTable').DataTable({
+                "ajax": {
+                    "url": "/api/others",
+                    "type": "GET",
+                    "datatype": "json",
+                    "contentType": "application/json; charset=utf-8",
+                    "dataSrc": ""
+                },
+                "columns": [
+
+                    { "data": "name" },
+                    { "data": "food" },
+                    { "data": "rating" },
+                    { "data": "hasOffer",
+                        "render": function (data, type, row) {
+                        var is_checked = (data == true) ? '<span class="glyphicon glyphicon-ok"></span>'
+                                                    : '<span class="glyphicon glyphicon-remove"></span>';
+                          return is_checked;
+                        }
+                    },
+                    {"defaultContent": "<button>Start chat</button>"}
+                ]
+            });
+
+            $('#dataTable tbody').on( 'click', 'button', function () {
+                var data = table.row( $(this).parents('tr') ).data();
+                alert( data[1] +"'s salary is: "+ data[ 4 ] );
+            } );
+        });
+    </script>
+</head>
+<body>
+<div class="container py-4">
+    <h4 class="text-center text-uppercase">User-List</h4>
+    <div id="dataTable_wrapper"></div>
+    <table id="dataTable" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+<!--            <th>uuid</th>-->
+            <th>name</th>
+            <th>food</th>
+            <th>rating</th>
+            <th>hasOffer</th>
+            <th>action</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+</body>
+</html>
