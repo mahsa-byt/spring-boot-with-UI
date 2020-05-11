@@ -38,8 +38,9 @@
             });
 
             $('#dataTable tbody').on( 'click', 'button', function () {
-                var data = table.row( $(this).parents('tr') ).data();
-                alert( data[1] +"'s salary is: "+ data[ 4 ] );
+                    window.location.replace("chat.html");
+<!--                var data = table.row( $(this).parents('tr') ).data();-->
+<!--                alert( data[1] +"'s salary is: "+ data[ 4 ] );-->
             } );
         });
     </script>

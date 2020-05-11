@@ -1,15 +1,12 @@
 'use strict';
 
 var usernamePage = document.querySelector('#username-page');
-//var chatPage = document.querySelector('#chat-page');
+var chatPage = document.querySelector('#chat-page');
 var usernameForm = document.querySelector('#usernameForm');
 var messageForm = document.querySelector('#messageForm');
 var messageInput = document.querySelector('#message');
 var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
-
-var totalform = document.querySelector('#totalform');
-var generalform = document.querySelector('#generalform');
 
 var stompClient = null;
 var username = null;
@@ -23,24 +20,13 @@ function connect(event) {
     username = document.querySelector('#name').value.trim();
 
     if(username) {
-    console.log("Hello world!");
         usernamePage.classList.add('hidden');
-        chatPage.classList.remove('hidden');
+        //chatPage.classList.remove('hidden');
 
         var socket = new SockJS('/javatechie');
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);
-    }
-    event.preventDefault();
-}
-
-function connect2(event) {
-    username = document.querySelector('#name').value.trim();
-    console.log("connect-2");
-    if(username) {
-        usernamePage.classList.add('hidden');
-        totalform.classList.remove('hidden');
     }
     event.preventDefault();
 }
@@ -131,17 +117,5 @@ function getAvatarColor(messageSender) {
     return colors[index];
 }
 
-    function getusers(){
-    console.log("get all users....");
-//    stompClient.send("api/get/others", {}, {});
-    document.action = "${pageContext.request.contextPath}/api/get/others";
-    console.log(document);
-    console.log("here-2");
-    }
-
-//usernameForm.addEventListener('submit', connect, true)
-usernameForm.addEventListener('submit', connect2, true)
+usernameForm.addEventListener('submit', connect, true)
 messageForm.addEventListener('submit', send, true)
-//generalform.addEventListener('submit', users, true)
-
-
