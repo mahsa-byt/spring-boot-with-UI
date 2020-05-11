@@ -3,7 +3,9 @@ package com.example.idea.controller;
 import com.example.idea.dataModel.User;
 import com.example.idea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.ui.Model;
@@ -31,13 +33,10 @@ public class Controller {
         this.userService = userService;
     }
 
-//    @GetMapping
-//    @MessageMapping("/get/others")
-    @RequestMapping(value = "/others", produces = MediaType.APPLICATION_XML_VALUE)
-    public String getAllOtherUsers(Model model) {
-        model.addAttribute("others", userService.getAllUsers());
-        //return new User(UUID.randomUUID(), "mahsa");
-        return "xmlTemplate";
+
+    @RequestMapping(value = "/others")
+    public ResponseEntity<List<User>> getAllOtherUsers(Model model) {
+        return new ResponseEntity<List<User>>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping
